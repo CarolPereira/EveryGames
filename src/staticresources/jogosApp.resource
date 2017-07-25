@@ -1,0 +1,1 @@
+var jogosApp = angular.module('jogosApp', []);

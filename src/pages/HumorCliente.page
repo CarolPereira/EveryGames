@@ -1,0 +1,81 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" controller="HumorClienteController">
+	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+		<head> 
+			<apex:includeScript value="/support/console/39.0/integration.js"/>
+			<apex:includeScript value="{!$Resource.AngularJS}" />
+			<apex:includeScript value="{!$Resource.jogosApp}" />
+			<apex:includeScript value="{!$Resource.HumorClienteJS}" />
+			<apex:stylesheet value="{!$Resource.HumorClienteCSS}" />
+			<apex:stylesheet value="{!URLFOR($Resource.SLDS100, 'assets/styles/salesforce-lightning-design-system.min.css')}" />
+			<apex:slds />
+		</head>
+		<body ng-app="jogosApp" ng-controller="HumorClienteCtrl">
+			<!-- Painel e grid -->
+			<div class="demo-only slds-grid" style="background: #f4f6f9">
+				<div class="slds-panel slds-grid slds-grid_vertical slds-nowrap slds-scrollable_y" style="height: 900px; width: 300px">
+					<div class="slds-panel__section slds-border_bottom  slds-scrollable_y">
+						<div class="slds-card slds-m-bottom--large" >
+							
+							<!-- Alerta de endereço -->
+							<div class="hide" ng-hide="EnderecoAtualizado" ng-class="{fade: startFade}">
+	  							<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert" >
+	  					
+		  							<!-- Texto do alerta -->
+		  							<h2>O endereço do cliente deve ser atualizado. 
+		  								<a href="#" class="slds-text-align_center" ng-click="abrirConta();">
+		  									Atualize aqui.
+		  								</a>
+		  							</h2>
+		  								<!-- Botão -->
+									<button class="slds-button slds-notify__close slds-button--icon-inverse" title="Close" ng-click="fecharAlerta();">
+									    <svg aria-hidden="true" class="slds-button__icon">
+									    	<use xlink:href="{!URLFOR($Resource.SLDS100, 'assets/icons/utility-sprite/svg/symbols.svg#close')}" />
+									    </svg>
+									    <span class="slds-assistive-text">Close</span>
+									</button>
+	  							</div>
+	  						</div>
+
+							<!-- card -->
+							<div class="slds-card__header slds-grid">
+								<div class="slds-media slds-media--center slds-has-flexi-truncate">
+									<div class="slds-media__body">
+										<h2 class="slds-text-heading--medium slds-truncate slds-text-align_center">Detalhes do cliente</h2>
+									</div>
+								</div>
+							</div>
+							<!-- Tabela -->
+							<table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_fixed-layout">
+								<thead>
+									<tr>
+										<th class="slds-text-align_center" style="font-weight: bold;" scope="col" colspan="5">
+											<img class="slds-text-align_center" id="theImage" src="{{img}}" width="200" height="200"/>
+										</th>
+									</tr>									
+								</thead>
+								<body>
+									<tr>
+										<th class="slds-text-heading--label slds-text-align_center" style="font-weight: bold;" scope="col" colspan="2"> Humor </th>
+										<td class="slds-text-heading--label slds-text-align_center" scope="col" colspan="3"> {{humor}} </td>
+									</tr>
+									<tr>
+										<th class="slds-text-heading--label slds-text-align_center" style="font-weight: bold;" scope="col" colspan="2"> Nome </th>
+										<td class="slds-text-heading--label slds-text-align_center" scope="col" colspan="3"> {{conta[0].Name}} </td>
+									</tr>
+									<tr>
+										<th class="slds-text-heading--label slds-text-align_center" style="font-weight: bold;" scope="col" colspan="5">Qtde. Casos totais : {{qtdCasos}} </th>
+										
+									</tr>
+									<tr class="slds-hint-parent" ng-repeat="motivo in lstMotivos">
+										<th class="slds-text-heading--label slds-text-align_center" style="font-weight: bold;" scope="col" colspan="3">{{motivo}}</th>
+										<td class="slds-text-heading--label slds-text-align_center" scope="col" colspan="2"> {{qtdTipos[motivo]}} </td>
+									</tr>														
+								</body>
+							</table>
+						</div>						
+					</div>
+				</div>				
+			</div>			
+		</body>
+	</html>
+</apex:page>

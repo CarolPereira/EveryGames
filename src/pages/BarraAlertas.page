@@ -1,0 +1,13 @@
+<apex:page showHeader="false" sidebar="false" controller="BarraAlertasController" standardStylesheets="false">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <apex:includeScript value="/support/console/40.0/integration.js"/>
+            <apex:includeScript value="{!$Resource.AngularJS}"/>
+            <apex:includeScript value="{!$Resource.jogosApp}" />
+            <apex:includeScript value="{!$Resource.BarraAlertasJS}"/>
+            <apex:slds />          
+        </head>
+        <body ng-app="jogosApp" ng-controller="BarraAlertasCtrl" >
+        </body>
+    </html>
+</apex:page>

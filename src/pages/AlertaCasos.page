@@ -1,0 +1,83 @@
+<apex:page showHeader="false" sidebar="false" controller="AlertaCasoController" standardStylesheets="false">
+	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<!-- Recursos estáticos -->
+		<head>
+			<apex:includeScript value="/support/console/39.0/integration.js"/>
+			<apex:includeScript value="{!$Resource.AngularJS}"/>
+			<apex:includeScript value="{!$Resource.jogosApp}"/>
+			<apex:includeScript value="{!$Resource.AlertaCasoJS}"/>
+			<apex:stylesheet value="{!$Resource.AlertaCasoCSS}"/>
+			<apex:slds />
+		</head>
+		<body ng-app="jogosApp" ng-controller="AlertasCasosCtrl">
+		
+		<!-- Grid , painel, section do painel e card -->
+			<div class="demo-only slds-grid" style="background:#f4f6f9">
+				<div class="slds-panel slds-grid slds-grid_vertical slds-nowrap slds-scrollable_y" style="height: 500px; width: 900px">
+			  		<div class="slds-panel__section slds-border_bottom  slds-scrollable_y">
+						<div class="slds-card slds-m-bottom--large" >
+							<div class="slds-card__header slds-grid">
+								<div class="slds-media slds-media--center slds-has-flexi-truncate">
+									<div class="slds-media__body">
+										<h2 class="slds-text-heading--medium slds-truncate">Alerta de Caso</h2>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Grupo de abas -->
+							<div class="slds-button-group" role="group">
+								<!-- botão todos com filtro nulo-->
+								<button class="slds-tabs_default__item" ng-click="filtrar('');">Todos({{lstCasos.length}})</button>
+								<!-- botões com valor e filto baseado na lista de motivos-->
+								<button class="slds-tabs_default__item" ng-repeat="motivo in lstMotivos" ng-click="filtrar(motivo); ">{{motivo}}({{qtdfiltro[motivo]}})</button>
+							</div>
+							
+							<!-- tabela -->
+							<table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_fixed-layout" >
+								<thead>
+									<tr class="slds-hint-parent" style="background:#e6e6ff;">
+										<th class="slds-text-align_center" style="font-weight: bold;" scope="col" width="15%">Número do caso</th>
+										<th class="slds-text-align_center" style="font-weight: bold;" scope="col" width="25%">Assunto</th>
+										<th class="slds-text-align_center" style="font-weight: bold;" scope="col" width="20%">Tipo</th>
+										<th class="slds-text-align_center" style="font-weight: bold;" scope="col" width="20%">Prioridade</th>
+										<th class="slds-text-align_center" style="font-weight: bold;" scope="col" width="20%">Status</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<!-- NG Repeat vai criar uma linha para cada linha da lista de casos-->
+									<tr class="slds-hint-parent" style="background:#f4f6f9" ng-repeat="caso in lstFiltrada">
+										<td class="slds-text-heading--label slds-text-align_center" scope="col">
+											<!-- No clique abre o caso -->
+											<a href="#" class="slds-text-align_center" ng-click="abrirCaso(caso.Id);">
+												{{caso.CaseNumber}}
+											</a>
+										</td>
+										<td class="slds-text-heading--label" scope="col">
+											{{caso.Subject}}
+										</td>
+										<td class="slds-text-heading--label" scope="col">
+											{{caso.Type}}
+										</td>
+										<td class="slds-text-heading--label slds-text-align_center" scope="col">
+											{{caso.Priority}}
+										</td>
+										<td class="slds-text-heading--label slds-text-align_center" scope="col">
+											{{caso.Status}}
+										</td>
+									</tr>
+									<!-- o hide esconde a linha se a lista estiver diferente de 0 -->
+									<tr ng-hide="lstCasos.length != 0">
+										<td>
+											Não há novos casos
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>	
+</apex:page>

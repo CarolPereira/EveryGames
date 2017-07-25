@@ -1,0 +1,67 @@
+<apex:page showHeader="false" sidebar="false" standardController="Jogo__c"  extensions="JogosPageController" standardStylesheets="false">
+	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<head>
+			<apex:includeScript value="/support/console/40.0/integration.js" />
+            <apex:includeScript value="{!$Resource.AngularJS}"/>
+            <apex:includeScript value="{!$Resource.jogosApp}" />
+            <apex:includeScript value="{!$Resource.JogosPageJS}"/>
+            <apex:stylesheet value="{!$Resource.JogosPageCSS}" />
+            <apex:slds />          
+        </head>
+        <body ng-app="jogosApp" ng-controller="JogosPageCtrl">
+        	<table class="slds-table">
+        		<thead>
+        			
+        		</thead>
+        		<tbody>
+        			<tr>
+        				<td class="slds-text-align_center " rowspan="7" width="300" height="300">
+        					<img class="slds-text-align_center" id="theImage" src="{!jogo__c.UrlImagem__c}" width="300" height="300" /> 
+        				</td>
+        				<td class="slds-text-align_left fonteConteudo" colspan="2">
+        						Título : {!jogo__c.Name}
+        				</td>
+        				
+        				<tr>
+        					<td class="slds-text-align_left" width="300" > 
+	        					Data de Lançamento : {!jogo__c.DataLancamento__c}    					
+	        				</td>
+        				</tr>
+        				<tr>
+        					<td class="slds-text-align_left" width="300" >
+        						Genero : {!jogo__c.Genero__c}
+        					</td>
+        				</tr>
+        				<tr>
+        					<td class="slds-text-align_left fonteConteudo" width="300" >
+        						Nota : {!jogo__c.NotaGeral__c}
+        					</td>
+        				</tr>	        				
+        				<tr>
+        					<td class="slds-text-align_left" width="300">
+        						Franquia : {!jogo__c.Franquia__r.Name}
+        					</td>
+        				</tr>
+        				<tr>
+        					<td class="slds-text-align_left" width="300">
+        						Plataforma : {!jogo__c.Plataforma__r.Name}
+        					</td>
+        				</tr>
+        				<tr>
+        					<td class="slds-text-align_left" width="300">
+        						Produtora : {!jogo__c.Produtora__c} 
+        					</td>
+        				</tr>
+        				<tr>
+        					<td class="slds-text-align_left" colspan="2">
+        						Sinopse : {!jogo__c.sinopse__c} 
+        					</td>
+        				</tr>
+        			</tr>
+
+        		</tbody>
+        	</table>
+      		
+		</body>
+	</html>   
+</apex:page>
