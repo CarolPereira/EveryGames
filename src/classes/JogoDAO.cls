@@ -12,7 +12,7 @@ public class JogoDAO {
 					Name,
 					DataLancamento__c,
 					Franquia__c,
-					Genero__c,
+					TAG__c,
 					NotaGeral__c,
 					Plataforma__c,
 					Produtora__c,

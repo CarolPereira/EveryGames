@@ -1,0 +1,22 @@
+<apex:page showHeader="false" sidebar="false" standardcontroller="Jogo__c" extensions="JogoVideosController" standardStylesheets="false">
+	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<head>
+			<apex:includeScript value="/support/console/40.0/integration.js"/>
+			<apex:includeScript value="{!$Resource.AngularJS}"/>
+			<apex:includeScript value="{!$Resource.jogosApp}"/>
+			<apex:includeScript value="{!$Resource.JogoVideosJS}"/>
+			<apex:slds />
+		</head>
+		<body ng-app="jogosApp" ng-controller="JogoVideosCtrl">
+				<div class="slds-grid slds-grid_vertical-align-center slds-nowrap slds-scrollable_x" style="height: 200px; width: 100%">
+					<div class="slds-panel__section " ng-repeat="video in lstVideos">
+					
+						<iframe frameborder="0" width="300" height="200" src="{{video | trusted}}" ></iframe>
+				
+					</div>
+				</div>			
+			
+		</body>
+	</html> 
+
+</apex:page>

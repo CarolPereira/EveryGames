@@ -5,63 +5,85 @@
             <apex:includeScript value="{!$Resource.AngularJS}"/>
             <apex:includeScript value="{!$Resource.jogosApp}" />
             <apex:includeScript value="{!$Resource.JogosPageJS}"/>
+            <apex:includeScript value="{!$Resource.JogoVideosJS}"/>
             <apex:stylesheet value="{!$Resource.JogosPageCSS}" />
             <apex:slds />          
         </head>
         <body ng-app="jogosApp" ng-controller="JogosPageCtrl">
-        	<table class="slds-table">
+    
+        	<table class="slds-table slds-table_col-bordered slds-table_fixed-layout" style="width: 900px">
         		<thead>
         			
         		</thead>
         		<tbody>
+                    <tr>
+                        <td class="slds-text-align_center " colspan="2">
+                            <div class="fonteNome">{{jogo.Name}}</div>
+                        </td>
+                    </tr>
         			<tr>
-        				<td class="slds-text-align_center " rowspan="7" width="300" height="300">
-        					<img class="slds-text-align_center" id="theImage" src="{!jogo__c.UrlImagem__c}" width="300" height="300" /> 
+        				<td class="slds-text-align_center " rowspan="6" width="450" height="450">
+        					<img class="slds-text-align_center" id="theImage" src="{{jogo.UrlImagem__c}}" width="450" height="
+                            40" /> 
         				</td>
-        				<td class="slds-text-align_left fonteConteudo" colspan="2">
-        						Título : {!jogo__c.Name}
+        				<td class="slds-text-align_left" >
+        				    <div class="fonteLabel">Nota : </div>
+                            <div class="fonteConteudo">{{jogo.NotaGeral__c}} </div> 
         				</td>
         				
         				<tr>
-        					<td class="slds-text-align_left" width="300" > 
-	        					Data de Lançamento : {!jogo__c.DataLancamento__c}    					
+        					<td class="slds-text-align_left" width="450" > 
+	        					<div class="fonteLabel">Data de Lançamento : </div>
+                                <div class="fonteConteudo">{{jogo.DataLancamento__c}} </div>   					
 	        				</td>
         				</tr>
         				<tr>
-        					<td class="slds-text-align_left" width="300" >
-        						Genero : {!jogo__c.Genero__c}
-        					</td>
-        				</tr>
-        				<tr>
-        					<td class="slds-text-align_left fonteConteudo" width="300" >
-        						Nota : {!jogo__c.NotaGeral__c}
-        					</td>
+        					<td class="slds-text-align_left" width="450">
+                                <div class="fonteLabel">Plataforma : </div>
+                                <div class="fonteConteudo"> 
+                                    <a class="textUnderline outputLookupLink forceOutputLookup" data-recordid="{{jogo.Plataforma__c}}" data-special-link="true" href="https://everygames-developer-edition.na50.force.com/s/detail/{{jogo.Plataforma__c}}"> {{jogo.Plataforma__r.Name}} </a>
+                                </div>
+                            </td>
         				</tr>	        				
         				<tr>
-        					<td class="slds-text-align_left" width="300">
-        						Franquia : {!jogo__c.Franquia__r.Name}
+        					<td class="slds-text-align_left" width="450">
+        						<div class="fonteLabel">Franquia : </div>
+                                <div class="fonteConteudo"  ng-click="abrirLink(jogo.Franquia__c);">
+                                    <a class="textUnderline outputLookupLink forceOutputLookup" data-recordid="{{jogo.Franquia__r.Name}}" data-special-link="true" href="https://everygames-developer-edition.na50.force.com/s/detail/{{jogo.Franquia__r.Name}}"> {{jogo.Franquia__r.Name}} </a>
+                                </div>
         					</td>
         				</tr>
         				<tr>
-        					<td class="slds-text-align_left" width="300">
-        						Plataforma : {!jogo__c.Plataforma__r.Name}
+        					<td class="slds-text-align_left" width="450">
+        						<div class="fonteLabel">Produtora : </div>
+                                <div class="fonteConteudo" ng-click="abrirLink(jogo.Produtora__c);">
+                                    <a class="textUnderline outputLookupLink forceOutputLookup" data-recordid="{{jogo.Produtora__c}}" data-special-link="true" href="https://everygames-developer-edition.na50.force.com/s/detail/{{jogo.Produtora__c}}"> {{jogo.Produtora__c}} </a>
+                                </div>
         					</td>
         				</tr>
+                        <tr>
+                            <td class="slds-text-align_left" width="450" >
+                                <div class="fonteLabel">TAGS : </div>
+                                <span class="slds-badge slds-theme--inverse" ng-repeat=" tag in lstTags">{{tag}}</span>
+                            </td>
+                        </tr>
         				<tr>
-        					<td class="slds-text-align_left" width="300">
-        						Produtora : {!jogo__c.Produtora__c} 
+        					<td class="slds-text-align_left" colspan="2"  width="900">
+        						<div class="fonteLabel">Sinopse : </div>
+                                <div class="sinopseText">{{jogo.Sinopse__c}} </div>
         					</td>
         				</tr>
-        				<tr>
-        					<td class="slds-text-align_left" colspan="2">
-        						Sinopse : {!jogo__c.sinopse__c} 
-        					</td>
-        				</tr>
+
         			</tr>
 
         		</tbody>
         	</table>
-      		
+      		<p>Vídeos</p>
+            <div class="slds-grid slds-grid_vertical-align-center slds-nowrap slds-scrollable_x" style="height: 200px; width: 900px">
+                <div class="slds-panel__section " ng-repeat="video in lstVideos">
+                    <iframe frameborder="0" width="300" height="200" src="{{video | trusted}}" ></iframe>
+                </div>
+            </div>
 		</body>
 	</html>   
 </apex:page>
