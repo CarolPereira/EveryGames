@@ -4,11 +4,12 @@ app.controller('JogoVideosCtrl', function($scope) {
 
 	$scope.lstVideos;
 
+
 	function iniciar() {
-		JogoVideosController.buscarVideos( function(result) {
-			$scope.lstVideos = result;
-			$scope.$apply();
-		});
+		
+		var lstVideos = urls.split(";");
+		$scope.$apply();
+		
 	}
 	
 	iniciar();

@@ -1,0 +1,53 @@
+<aura:component controller="EveryGames.ExpenseController">
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="expenses" type="EveryGames.Expense__c[]" />
+	<aura:attribute name="newExpense" type="EveryGames.Expense__c"
+			default="{	'sobjectType' : 'EveryGames__Expense__c',
+						'Name' : '',
+						'EveryGames__Amount__c' : 0,
+						'EveryGames__Client__c' : '',
+						'EveryGames__Date__c' : '',
+						'EveryGames__Reimbursed__c' : false
+					}" />
+	<!-- Attributes for Expense Counters -->
+	<aura:attribute name="total" type="Double" default="0.00" />
+	<aura:attribute name="exp" type="Double" default="0" />
+
+	<!-- Input From using components -->
+	<form>
+		<fieldset>
+			<ui:inputText aura:id="expname" label="Expense Name" class="form-control" value="{!v.newExpense.name}" placeholder="My Expense" required="true" />
+			<ui:inputText aura:id="amount" label="Amount" class="form-control" value="{!v.newExpense.EveryGames__Amount__c}"
+
+			placeholder="20.80" required="true"/>
+			<ui:inputNumber aura:id="client" label="Client" class="form-control" value="{!v.newExpense.EveryGames__Client__c}"
+
+			placeholder="ABC Co." />
+			<ui:inputDateTime aura:id="expdate" label="Expense Date" class="form-control" value="{!v.newExpense.EveryGames__Date__c}"
+
+			displayDatePicker="true" />
+			<ui:inputCheckbox aura:id="reimbursed" label="Reimbused?"
+
+				value="{!v.newExpense.EveryGames__Reimbursed__c}"/>
+			<ui:button label="Submit" press="{!c.createExpense}"/>
+		</fieldset>
+	</form>
+
+	<!--  Expense Counters -->
+	<div class="row">
+		<!-- Change the counter color to red if total amount is more than 100 -->
+		<div class="{!v.total >= 100? 'alert alert-danger' : 'alert alert-sucess'}">
+			<h3> Total Expenses</h3>$<ui:outputNumber value="{!v.total}" format=".00"/>
+		</div>
+		<div class="alert alert-success">
+			<h3> Nº. of Expenses</h3><ui:outputNumber value="{!v.exp}"/>
+		</div>
+	</div>
+
+	<!-- Display expense records -->
+	<div class="row">
+		<aura:iteration items="{!v.expenses}" var="expenses">
+			<p>{!expense.name}, {!expense.EveryGames__Client__c},{!expense.EveryGames__Amount__c},{!expense.EveryGames__Date__c},{!expense.EveryGames__Reimbursed__c}</p>
+		</aura:iteration>
+	</div>
+</aura:component>

@@ -9,4 +9,8 @@ public class AlertaCasoController {
 		return CasoDAO.getInstance().buscarCasosAbertos();
 	}
 	
+	@remoteAction
+	public static List<Schema.PicklistEntry> buscarFiltroTipo(){
+		return Case.Type.getDescribe().getPicklistValues();
+	}
 }

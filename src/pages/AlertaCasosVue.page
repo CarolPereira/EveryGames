@@ -1,0 +1,77 @@
+<apex:page showHeader="false" sidebar="false" controller="AlertaCasoController" standardStylesheets="false" docType="html-5.0">
+	<html xmlns="http://www.w3.org/2000/svg" xmlns:v-on="http://fake.org/fake" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+		<head> 
+			<apex:includeScript value="/support/console/39.0/integration.js"/>
+			<apex:includeScript value="{!$Resource.SfRemoteActionCall}"/>
+			<apex:includeScript value="{!$Resource.UtilConsoleJs}"/>
+			<apex:includeScript value="{!URLFOR($Resource.Vuejs, '/Vuejs/lib/vue.min.js')}"/>
+			<apex:includeScript value="{!$Resource.AlertaCasosVueApp}" loadOnReady="true" />
+			<apex:stylesheet value="{!$Resource.TabelaConsoleCss}" />
+			<apex:stylesheet value="{!$Resource.AlertaCasoCSS}" />
+			<apex:slds />
+		</head>
+		<body>
+			<div id="app">
+				<mainpage />
+			</div>
+			<template id="template-page">
+				<div class="demo-only slds-grid">
+					<div class="slds-panel slds-grid slds-grid_vertical slds-nowrap  slds-scrollable_y">
+				  		<div class="slds-panel__section slds-border_bottom  slds-scrollable_y">
+							<div class="slds-card slds-m-bottom--large" >
+								<div class="slds-card__header slds-grid">
+									<div class="slds-media slds-media--center slds-has-flexi-truncate">
+										<div class="slds-media__body">
+											<h2 class="slds-text-heading--medium slds-truncate">Alerta de Caso</h2>
+										</div>
+									</div>
+								</div>
+								<div class="busca" v-show="casos.length > 0">
+									<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right">
+										<svg class="slds-input__icon slds-input__icon_left" aria-hidden="true">
+											<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#search')}"></use>
+										</svg>
+										<input type="text" v-model="filtroBusca" class="slds-input slds-lookup__search-input" placeholder="Buscar..." role="textbox" />
+									</div>
+								</div>
+								<div class="slds-button-group" role="group" v-show="casos.length > 0">
+									<button class="slds-button slds-button_neutral" v-on:click="escolherFiltroTipo('');">Todos ({{casos.length}})</button>
+									<button class="slds-button slds-button_neutral" v-for="(item, index) in filtroTipos" v-on:click="escolherFiltroTipo(item.label);">
+										{{item.label}} ({{ mapQtdeCasosPorTipo.get(item.label) != null ? mapQtdeCasosPorTipo.get(item.label) : 0 }})
+									</button>
+								</div>
+								<div class="nao-encontrado" v-show="casos.length == 0">
+									Não há casos em espera
+								</div>
+								<table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_fixed-layout" v-show="casos.length > 0">
+									<thead>
+										<tr class="slds-hint-parent">
+											<th class="slds-text-align_center" scope="col">Número do caso</th>
+											<th class="slds-text-align_center" scope="col">Segmento</th>
+											<th class="slds-text-align_center" scope="col">Programa</th>
+											<th class="slds-text-align_center" scope="col">Motivo</th>
+											<th class="slds-text-align_center" scope="col">Prioridade</th>
+											<th class="slds-text-align_center" scope="col">Status</th>
+										</tr>	
+									</thead>
+									<tbody>
+										<tr class="slds-hint-parent" v-for="(caso, index) in casosFiltrados">
+											<td class="slds-text-heading--label slds-text-align_center" scope="col">
+												<a href="#" class="slds-text-align_center" v-on:click="abrirCaso(caso.Id);">{{caso.CaseNumber}}</a>
+											</td>
+											<td class="slds-text-heading--label slds-text-align_center" scope="col">{{caso.Segmento__c}}</td>
+											<td class="slds-text-heading--label slds-text-align_center" scope="col">{{ caso.Programa__r != null ? caso.Programa__r.Name : '' }}</td>
+											<td class="slds-text-heading--label slds-text-align_center" scope="col">{{caso.Type}}</td>
+											<td class="slds-text-heading--label slds-text-align_center" scope="col">{{caso.Priority}}</td>
+											<td class="slds-text-heading--label slds-text-align_center" scope="col">{{caso.Status}}</td>
+										</tr>	
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+		</body>
+	</html>
+</apex:page>
