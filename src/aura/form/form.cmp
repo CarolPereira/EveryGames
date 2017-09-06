@@ -1,4 +1,4 @@
-<aura:component controller="EveryGames.ExpenseController">
+<aura:component controller="EveryGames.ExpenseController" implements="force:appHostable">
 	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 	<aura:attribute name="expenses" type="EveryGames.Expense__c[]" />
 	<aura:attribute name="newExpense" type="EveryGames.Expense__c"
@@ -46,8 +46,34 @@
 
 	<!-- Display expense records -->
 	<div class="row">
-		<aura:iteration items="{!v.expenses}" var="expenses">
-			<p>{!expense.name}, {!expense.EveryGames__Client__c},{!expense.EveryGames__Amount__c},{!expense.EveryGames__Date__c},{!expense.EveryGames__Reimbursed__c}</p>
+		<aura:iteration items="{!v.expenses}" var="expense">
+			<EveryGames:expenseList expense="{!expense}"/>
+			<!-- p>{!expense.name}, {!expense.EveryGames__Client__c},{!expense.EveryGames__Amount__c},{!expense.EveryGames__Date__c},{!expense.EveryGames__Reimbursed__c}</p> -->
 		</aura:iteration>
 	</div>
+
+    <lightning:icon iconName="action:approval" size="large" alternativeText="Indicates approval"/>
+    <lightning:badge label="Label" />
+    <lightning:button variant="brand" label="Submit" onclick="{! c.handleClick }" />
+    <lightning:button variant="brand" label="Download" iconName="utility:download" iconPosition="left" onclick="{! c.handleClick }" />
+
+    <lightning:buttonGroup>
+        <lightning:button label="Refresh" />
+        <lightning:button label="Edit" />
+        <lightning:button label="Save" />
+    </lightning:buttonGroup>
+
+     <lightning:buttonIcon iconName="utility:close" variant="bare" onclick="{! c.handleClick }" alternativeText="Close window." />
+    <lightning:buttonMenu iconName="utility:settings" alternativeText="Settings" onselect="{! c.handleMenuSelect }">
+	    <lightning:menuItem label="Font" value="font" />
+	    <lightning:menuItem label="Size" value="size"/>
+	    <lightning:menuItem label="Format" value="format" />
+	</lightning:buttonMenu>
+
+	<lightning:buttonMenu iconName="utility:settings" alternativeText="Settings" onselect="{! c.handleMenuSelect }">
+    <lightning:menuItem label="Font" value="font" />
+    <lightning:menuItem label="Size" value="size"/>
+    <lightning:menuItem label="Format" value="format" />
+</lightning:buttonMenu>
+
 </aura:component>

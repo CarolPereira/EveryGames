@@ -1,0 +1,11 @@
+<aura:component controller="EveryGames.JogadorFichaController" implements="force:appHostable">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="cards" type="EveryGames.Jogador__c[]" />
+    <!-- Tentativa de fazer or cards -->
+    <div class="row">
+		<aura:iteration items="{!v.cards}" var="card">
+			<EveryGames:CardPlayer card="{!card}"/>
+		</aura:iteration>
+	</div>
+
+</aura:component>

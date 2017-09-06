@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable">
+	<aura:attribute name="expense" type="EveryGames.Expense__c" />
+	<!--Color the item blue if the expense is reimbursed -->
+	<div class="{!v.expense.EveryGames__reimbursed__c == true ? 'listRecord recordLayout blue' : 'listRecord recordLayout white'}">
+		<a aura:id="expense" href="{!'/'+v.expense.id}">
+			<div class="itemTitle">{!v.expense.name}</div>
+			<div class="recordItem">Amount:
+				<ui:outputNumber value="{!v.expense.EveryGames__amount__c}" format=".00"/>
+			</div>
+			<div class="recordItem">Client:
+				<ui:outputText value="{!v.expense.EveryGames__client__c}"/>
+			</div>
+			<div class="recordItem">Date:
+				<ui:outputDateTime value="{!v.expense.EveryGames__date__c}" />
+			</div>
+			<div class="recordItem"> Reimbursed?
+				<ui:inputCheckbox value="{!v.expense.EveryGames__reimbursed__c}" click="{!c.update}"/>
+			</div>
+		</a>
+	</div>
+
+</aura:component>

@@ -1,0 +1,19 @@
+<aura:component >
+	<aura:attribute name="jogo" type="EveryGames.PossuiJogo__c" />
+	<div class="c-container">
+		<lightning:layout horizontalAlign="space">
+			<lightning:layoutItem flexibility="auto" padding="around-small">
+				{!v.jogo.Name}
+			</lightning:layoutItem>
+			<lightning:layoutItem flexibility="auto" padding="around-small">
+				{!v.jogo.EveryGames__Status__c}
+			</lightning:layoutItem>
+			<lightning:layoutItem flexibility="auto" padding="around-small">
+				{!v.jogo.EveryGames__Recomendaria__c}
+			</lightning:layoutItem>
+			<lightning:layoutItem flexibility="auto" padding="around-small">
+				{!v.jogo.EveryGames__Nota__c}
+			</lightning:layoutItem>
+		</lightning:layout>
+	</div>
+</aura:component>

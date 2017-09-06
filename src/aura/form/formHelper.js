@@ -19,4 +19,22 @@
 		component.set("v.total",total);
 		component.set("v.exp",expenses.length);
 	},//Delimiter for futuro code
+	createExpense: function(component, expense){
+		this.upsertExpense(component, expense, function(a){
+			var expenses= component.get("v.expenses");
+			expenses.push(a.getReturnValue());
+			component.set("v.expenses", expenses);
+			this.updateTotal(component);
+		});
+	},
+	upsertExpense: function(component, expense, callback) {
+		var action = component.get("c.saveExpense");
+		action.setParams({
+			"expense" : expense
+		});
+		if(callback) {
+			action.setCallback(this, callback)
+		}
+		$A.enqueueAction(action);
+	}
 })
