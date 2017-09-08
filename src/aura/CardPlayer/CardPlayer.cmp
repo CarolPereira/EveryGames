@@ -6,38 +6,35 @@
 	<!-- Card -->
 		<lightning:card>
 		    <aura:set attribute="title">
-		        {!v.card.Name}'s Records
+		    	<lightning:buttonGroup>
+		    		<lightning:buttonIcon iconName="utility:favorite" variant="border" onclick="{! c.handleClick }" alternativeText="Follow" />
+		    		<lightning:buttonIcon iconName="utility:like" variant="border" onclick="{! c.handleClick }" alternativeText="Commend" />
+		    		<lightning:buttonIcon iconName="utility:dislike" variant="border" onclick="{! c.handleClick }" alternativeText="Report" />
+		    		<lightning:buttonIcon iconName="utility:adduser" variant="border" onclick="{! c.handleClick }" alternativeText="Add" />
+		    		<lightning:buttonIcon iconName="utility:muted" variant="border" onclick="{!c.Mute}" alternativeText="Mute" />
+			        <lightning:button label="Send Message"/>
+			    </lightning:buttonGroup>		        
 		    </aura:set>
 		    <aura:set attribute="footer">
-		        <lightning:badge label="Jogador"/>
+		        <lightning:badge label="See Profile"/>
 		    </aura:set>
 		    <aura:set attribute="actions">
-		        <lightning:button label="Follow"/>
-		        <lightning:button label="Commend"/>
-		        <lightning:button label="Send Message"/>
+		       	<!-- onde era os botoes antes -->
 		    </aura:set>
 		    <p class="slds-p-horizontal--small">
+		    	<p> {!v.card.Name}'s Records</p>
 		    <p>CEP : <ui:outputText value="{!v.card.EveryGames__CEP__c}" /></p>
 		    <p>CPF : <ui:outputText value="{!v.card.EveryGames__CPF__c}" /></p>
 
 		    <p>Game's List</p>
 		         
-				<div class="c-container">
-					<lightning:layout horizontalAlign="space">
-					    <lightning:layoutItem flexibility="auto" padding="around-small">
-					        Jogo
-					    </lightning:layoutItem>
-					    <lightning:layoutItem flexibility="auto" padding="around-small">
-					        Status
-					    </lightning:layoutItem>
-					    <lightning:layoutItem flexibility="auto" padding="around-small">
-					        Recomendaria?
-					    </lightning:layoutItem>
-					    <lightning:layoutItem flexibility="auto" padding="around-small">
-					        Nota
-					    </lightning:layoutItem>
-					</lightning:layout>
-				</div>
+				<table class="slds-table slds-table_bordered slds-table_cell-buffer">
+					<tr>
+						<th width="60%">Jogo</th>
+						<th width="20%">Status</th>
+						<th width="20%">Nota</th>
+					</tr>
+				</table>
 
 				<div class="row">
 					<aura:iteration items="{!v.jogos}" var="jogo">

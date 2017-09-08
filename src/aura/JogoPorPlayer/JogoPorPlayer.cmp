@@ -1,9 +1,9 @@
 <aura:component >
 	<aura:attribute name="jogo" type="EveryGames.PossuiJogo__c" />
 	<div class="c-container">
-		<lightning:layout horizontalAlign="space">
+		<!-- <lightning:layout horizontalAlign="space">
 			<lightning:layoutItem flexibility="auto" padding="around-small">
-				{!v.jogo.Name}
+				{!v.jogo.EveryGames__Jogo__r.Name}
 			</lightning:layoutItem>
 			<lightning:layoutItem flexibility="auto" padding="around-small">
 				{!v.jogo.EveryGames__Status__c}
@@ -14,6 +14,13 @@
 			<lightning:layoutItem flexibility="auto" padding="around-small">
 				{!v.jogo.EveryGames__Nota__c}
 			</lightning:layoutItem>
-		</lightning:layout>
+		</lightning:layout> -->
+		<table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover">
+			<tr>
+				<td width="60%">{!v.jogo.EveryGames__Jogo__r.Name}</td>
+				<td>{!v.jogo.EveryGames__Status__c}</td>
+				<td>{!v.jogo.EveryGames__Nota__c}</td>
+			</tr>
+		</table>
 	</div>
 </aura:component>

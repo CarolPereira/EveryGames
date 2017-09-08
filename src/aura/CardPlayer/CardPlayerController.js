@@ -1,6 +1,7 @@
 ({
-	doInit : function(component, event, helper, jogador) {
+	doInit : function(component, event, helper) {
 		//Update expense counters
-		helper.getJogos(component, jogador);
+		
+		helper.getJogos(component);
 	},
 })
