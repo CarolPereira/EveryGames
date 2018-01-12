@@ -1,0 +1,18 @@
+<aura:component controller="ContatosController" implements="force:appHostable,flexipage:availableForAllPageTypes, force:hasRecordId, force:hasSObjectName">
+
+	<aura:attribute name="recordId" type="String" default="0016A000006C5XkQAK" />
+	<aura:attribute name="contatos" type="Contact[]" default="[]]" />
+
+	<aura:handler  name="init" action="{! c.init}" value="{! this}"  ></aura:handler>
+	<lightning:card>
+		<aura:set attribute="title">
+			<lightning:icon iconName="standard:contact" />
+			Contatos
+		</aura:set>
+		
+		
+		{! v.contatos.length}
+
+	</lightning:card>
+
+</aura:component>

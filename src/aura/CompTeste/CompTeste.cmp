@@ -1,4 +1,4 @@
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="CompTesteController">
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes, force:hasRecordId, force:hasSObjectName" controller="CompTesteController">
 	<aura:handler name="init" action="{!c.myAction}" value="{!this}" />
 	<aura:attribute name="contacts" type="Contact[]" />
 	<ul>

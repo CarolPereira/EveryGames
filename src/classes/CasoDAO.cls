@@ -47,4 +47,20 @@ public class CasoDAO {
 		];
 	}
 	
+	public List<Case> buscarCasos(String status, String analista){
+		return [SELECT
+					Id,
+					CaseNumber,
+					Type,
+					Priority,
+					Subject,
+					Status,
+					Reason,
+					Origin
+				FROM
+					Case
+				WHERE
+					Status =: status
+		];	
+	}
 }
