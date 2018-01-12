@@ -1,0 +1,26 @@
+<aura:component controller="AttachmentComponentController" implements="force:appHostable, flexipage:availableForAllPageTypes, force:hasRecordId, force:hasSObjectName, forceCommunity:availableForAllPageTypes" access="global">
+
+	<aura:attribute name="recordId" type="String" />
+	<aura:attribute name="lstAttachments" type="Object" />
+	
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+	<aura:handler event="force:refreshView" action="{!c.isRefreshed}" />
+
+	<lightning:card title="Attachments">		
+	    
+	    <lightning:fileUpload label="Attach receipt" 
+	        multiple="true" 
+	        accept=".pdf, .png"
+	        recordId="{!v.recordId}" 
+	        onuploadfinished="{!c.handleUploadFinished}" />
+
+		All Attachments :
+
+		<div class="row">		
+			<aura:iteration items="{!v.lstAttachments}" var="attachment"  >
+				<EveryGames:AttachmentItemList attachment="{!attachment}" />
+			</aura:iteration>
+		</div>
+	</lightning:card>
+	
+</aura:component>

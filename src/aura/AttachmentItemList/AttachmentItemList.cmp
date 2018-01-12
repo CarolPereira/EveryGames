@@ -1,0 +1,22 @@
+<aura:component >
+	
+	<aura:attribute  name="attachment"  type="Object" />
+	<aura:attribute  name="attachmentDownloadUrl" type="String" />
+
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+	<lightning:card >
+			<!-- header -->
+		<aura:set  attribute="title">
+				{!v.attachment.Title}
+		</aura:set>
+			<!-- actions -->
+		<aura:set  attribute="actions">
+			<lightning:button  label="Details" onclick="{! c.goToFile}" />
+			<lightning:button  label="Visualize" onclick="{! c.openSingleFile}" />
+			<lightning:button  label="Download" iconName="utility:download" iconPosition="left" onclick="{! c.downloadFile}" />
+		</aura:set>
+
+	</lightning:card>
+
+</aura:component>
